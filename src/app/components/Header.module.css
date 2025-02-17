@@ -1,0 +1,19 @@
+.header {
+    margin: 0 auto;
+    padding: 20px;
+    height: 132px;
+    background-color: #f5f9fa;
+  }
+  .header h1 {
+    font-size: 24px;
+  }
+  .header a {
+    font-size: 24px;
+    color: #fff;
+    background-color: #33b9a7;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+  }

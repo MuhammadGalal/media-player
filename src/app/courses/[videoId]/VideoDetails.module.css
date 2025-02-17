@@ -1,0 +1,72 @@
+.header {
+    margin: 0 auto;
+    padding: 20px;
+    height: 132px;
+    background-color: #f5f9fa;
+    margin-bottom: 10px;
+}
+.videoDetails {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.videoDetails section {
+    border: 2px solid #f5f5f5;
+    padding: 10px;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 2px solid #f5f5f5;
+    padding: 10px;
+}
+.courseDetails {
+    /* width: 100%; */
+    border: 2px solid #f5f5f5;
+    padding: 10px;
+    margin: 10px;
+    box-shadow:  5px 5px 50px #f5f5f5;
+}
+.comments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.commentForm {
+    border: 2px solid #f5f5f5;
+    padding: 10px;
+    margin: 10px;
+    box-shadow:  5px 5px 50px #f5f5f5;
+}
+.commentForm textarea {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    text-indent: 1rem;
+    padding-top: 2rem;
+    height: 3rem;
+    outline: none;
+}
+.commentForm button {
+    font-size: 1rem;
+    color: #fff;
+    background-color: #33b9a7;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    border: none;
+}
+@media (max-width: 900px) {
+    .videoDetails {
+        flex-direction: column;
+    }
+}
+
