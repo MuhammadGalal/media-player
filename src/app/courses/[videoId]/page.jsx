@@ -50,10 +50,20 @@ export default function VideoDetails() {
   }, [comment, videoId]);
 
   const handleVideoProgress = (progress) => {
+    console.log("Progress Update:", progress.played);
     if (!watched && progress.played >= 0.8) {
+      console.log('Reached 80% - marking as watched');
+
       setWatched(true);
+      // Immediately update localStorage
+      // localStorage.setItem(`watched_${videoId}`, 'true');
+      // window.dispatchEvent(new Event('storage'));
     }
   };
+  useEffect(() => {
+    const savedWatched = localStorage.getItem(`watched_${videoId}`);
+    setWatched(savedWatched === 'true');
+  }, [videoId]);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();

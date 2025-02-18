@@ -2,9 +2,9 @@
 import { useState, useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 import { Box, Slider, Typography, IconButton, Tooltip } from "@mui/material";
-import { PlayArrow, Pause, VolumeUp, VolumeOff, Fullscreen, FullscreenExit, Speed } from "@mui/icons-material";
+import { PlayArrow, Pause, VolumeUp, VolumeOff, Fullscreen, FullscreenExit } from "@mui/icons-material";
 
-export default function VideoPlayer({ url }) {
+export default function VideoPlayer({ url, onProgress  }) {
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [played, setPlayed] = useState(0);
@@ -56,7 +56,15 @@ export default function VideoPlayer({ url }) {
 
   const handleMuteToggle = () => setMuted(!muted);
   const handleVolumeChange = (_, value) => setVolume(value / 100);
-  const handleProgress = (state) => setPlayed(state.played);
+  const handleProgress = (state) => {
+    // Update local progress for the slider
+    setPlayed(state.played);
+    
+    // Call parent's progress handler for watched status tracking
+    if (onProgress) {
+      onProgress(state);
+    }
+  };
   const handleDuration = (duration) => setDuration(duration);
 
   const toggleFullScreen = () => {
@@ -74,6 +82,7 @@ export default function VideoPlayer({ url }) {
     const secondsStr = date.getUTCSeconds().toString().padStart(2, '0');
     return hours ? `${hours}:${minutes}:${secondsStr}` : `${minutes}:${secondsStr}`;
   };
+  
 
   if (!isClient) return null;
 
@@ -131,13 +140,15 @@ export default function VideoPlayer({ url }) {
         muted={muted}
         // playbackRate={speed}
         onProgress={handleProgress}
+        // onProgress={onProgress}
+        progressInterval={1000} // Check progress every second
         onDuration={handleDuration}
         width="100%"
         height="100%"
         onClick={handlePlayPause}
         config={{
           youtube: {
-            playerVars: { modestbranding: 1, rel: 0, iv_load_policy: 3 }
+            playerVars: { modestbranding: 1, rel: 0, iv_load_policy: 3, enablejsapi: 1 }
           }
         }}
       />
