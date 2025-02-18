@@ -33,8 +33,11 @@ export default function VideoDetails() {
 
   // Save watched status
   useEffect(() => {
-    localStorage.setItem(`watched_${videoId}`, JSON.stringify(watched));
+    localStorage.setItem(`watched_${videoId}`, watched.toString());
+    // Broadcast changes to other tabs
+    window.dispatchEvent(new Event('storage'));
   }, [watched, videoId]);
+  
 
   // Save comments
   useEffect(() => {
@@ -47,7 +50,7 @@ export default function VideoDetails() {
   }, [comment, videoId]);
 
   const handleVideoProgress = (progress) => {
-    if (progress.played >= 0.8 && !watched) {
+    if (!watched && progress.played >= 0.8) {
       setWatched(true);
     }
   };
@@ -76,7 +79,10 @@ export default function VideoDetails() {
     <>
       <header className={styles.header}>
         <Breadcrumb items={breadcrumb} />
-        <h1>{video.title} {watched && <FaCheckCircle style={{ color: 'green' }} />}</h1>
+        <h1>
+          {video.title}
+          {watched && <FaCheckCircle className={styles.watchedIcon} />}
+        </h1>
       </header>
 
       <div className={styles.videoDetails}>

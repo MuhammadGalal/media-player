@@ -44,3 +44,17 @@ margin: 2rem;
     margin: 2rem;
     text-align: center;
 }
+.watchedBadge {
+  color: #4CAF50;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.courseImage {
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.courseImage:hover {
+  transform: scale(1.03);
+}
