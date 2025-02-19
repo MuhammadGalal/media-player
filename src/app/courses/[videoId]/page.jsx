@@ -20,7 +20,6 @@ export default function VideoDetails() {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
-  // Load saved data on component mount
   useEffect(() => {
     const savedWatched = localStorage.getItem(`watched_${videoId}`);
     const savedComments = localStorage.getItem(`comments_${videoId}`);
@@ -31,33 +30,26 @@ export default function VideoDetails() {
     if (savedDraft) setComment(savedDraft);
   }, [videoId]);
 
-  // Save watched status
   useEffect(() => {
     localStorage.setItem(`watched_${videoId}`, watched.toString());
-    // Broadcast changes to other tabs
     window.dispatchEvent(new Event('storage'));
   }, [watched, videoId]);
   
 
-  // Save comments
   useEffect(() => {
     localStorage.setItem(`comments_${videoId}`, JSON.stringify(comments));
   }, [comments, videoId]);
 
-  // Save comment draft
   useEffect(() => {
     localStorage.setItem(`commentDraft_${videoId}`, comment);
   }, [comment, videoId]);
 
   const handleVideoProgress = (progress) => {
-    console.log("Progress Update:", progress.played);
+    // console.log("progress Update:", progress.played);
     if (!watched && progress.played >= 0.8) {
-      console.log('Reached 80% - marking as watched');
+      // console.log('80% - watched');
 
       setWatched(true);
-      // Immediately update localStorage
-      // localStorage.setItem(`watched_${videoId}`, 'true');
-      // window.dispatchEvent(new Event('storage'));
     }
   };
   useEffect(() => {
@@ -166,7 +158,6 @@ export default function VideoDetails() {
             <h3>Week 1 - 4</h3>
             <p>Advanced story telling techniques for writers: <br /> Personas, Characters & Plots</p>
             <hr />
-            {/* Repeat for all topics */}
             {[
               "Introduction",
               "Course Overview",

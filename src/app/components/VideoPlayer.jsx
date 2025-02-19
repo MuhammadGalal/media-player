@@ -11,7 +11,6 @@ export default function VideoPlayer({ url, onProgress  }) {
   const [duration, setDuration] = useState(0);
   const [muted, setMuted] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [speed, setSpeed] = useState(1);
   const [isClient, setIsClient] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
   
@@ -57,10 +56,8 @@ export default function VideoPlayer({ url, onProgress  }) {
   const handleMuteToggle = () => setMuted(!muted);
   const handleVolumeChange = (_, value) => setVolume(value / 100);
   const handleProgress = (state) => {
-    // Update local progress for the slider
     setPlayed(state.played);
     
-    // Call parent's progress handler for watched status tracking
     if (onProgress) {
       onProgress(state);
     }
@@ -105,7 +102,6 @@ export default function VideoPlayer({ url, onProgress  }) {
       onMouseMove={handleMouseActivity}
       onTouchMove={handleMouseActivity}
     >
-      {/* Centered Play/Pause Button */}
       <Box
         sx={{
           position: 'absolute',
@@ -138,10 +134,8 @@ export default function VideoPlayer({ url, onProgress  }) {
         playing={playing}
         volume={volume}
         muted={muted}
-        // playbackRate={speed}
         onProgress={handleProgress}
-        // onProgress={onProgress}
-        progressInterval={1000} // Check progress every second
+        progressInterval={1000} 
         onDuration={handleDuration}
         width="100%"
         height="100%"
@@ -153,7 +147,6 @@ export default function VideoPlayer({ url, onProgress  }) {
         }}
       />
 
-      {/* Bottom Control Bar */}
       <Box
         className="controls"
         sx={{
